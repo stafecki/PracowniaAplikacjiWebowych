@@ -1,6 +1,6 @@
 const http = require("http");
 
-http.createServer((req, res) => {
+http.createServer(async (req, res) => {
     switch (req.url) {
         case "/":
             res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
@@ -27,17 +27,22 @@ http.createServer((req, res) => {
             res.end();
             break;
         case "/externalHTML":
-            const fs = require('fs')
-            fs.readFile('index.html', 'utf8', (err, data) => {
+            const fs = require('fs/promises');
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            /*fs.readFile('index.html', 'utf8', (err, data) => {
                 if (!err) {
                     res.writeHead(200, {'Content-Type': 'text/html'});
-                    res.write(data)
+                    res.write(data);
                     res.end();
                 }
                 else{
+                    console.log(err)
                     res.end();
                 }
-            })
+            })*/
+            const file = await fs.readFile('index.html', 'utf8');
+            res.end(file);
+
             break;
         default:
             res.writeHead(404, {'Content-Type': 'text/plain'});
