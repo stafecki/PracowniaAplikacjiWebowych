@@ -7,6 +7,9 @@ const staticDir = path.join(__dirname, 'static')
 
 app.use(express.static(staticDir))
 
+app.use(express.urlencoded({ extended: false }))
+
+
 app.get('/', (req, res, next) => {
   const file = path.join(staticDir, 'pages', 'index.html')
   res.sendFile(file, (err) => {
@@ -33,6 +36,11 @@ app.get('/kontakt', (req, res, next) => {
   res.sendFile(file, (err) => {
     if (err) return next(err)
   })
+})
+
+app.post('/kontakt', (req, res) => {
+  console.log('Formularz kontaktowy - dane:', req.body)
+  res.redirect('/')
 })
 
 app.use((err, req, res, next) => {
