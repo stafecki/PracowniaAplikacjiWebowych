@@ -3,37 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>Kontakt</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<h2>
-  Menu
-</h2>
-<menu>
-  <a href="/">Strona główna</a> |
-  <a href="/o-nas">O nas</a> |
-  <a href="/oferta">Oferta</a> |
-  <a href="/kontakt">Kontakt</a>
-</menu>
-<header>
-  <h1>
-    Kontakt
-  </h1>
-</header>
-<main>
-  <form action="/kontakt" method="post">
-    <label for="name">Imię</label><br>
-    <input type="text" id="name" name="name" required><br><br>
-    <label for="surname">Nazwisko</label><br>
-    <input type="text" id="surname" name="surname" required><br><br>
-    <label for="email">Adres e-mail:</label><br>
-    <input type="email" id="email" name="email" required><br><br>
-    <label for="message">Wiadomość:</label><br>
-    <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
-    <input type="submit" value="Wyślij">
-  </form>
-</main>
-<footer>
-  <p>Patryk Stafecki 4c</p>
-</footer>
+<div class="container">
+  <h2>
+    Menu
+  </h2>
+  <menu>
+    <a href="/">Strona główna</a> |
+    <a href="/o-nas">O nas</a> |
+    <a href="/oferta">Oferta</a> |
+    <a href="/kontakt">Kontakt</a>
+  </menu>
+  <header>
+    <h1>
+      Kontakt
+    </h1>
+  </header>
+  <main>
+    <form action="/kontakt" method="post">
+      <label for="name">Imię</label><br>
+      <input type="text" id="name" name="name" required><br><br>
+      <label for="surname">Nazwisko</label><br>
+      <input type="text" id="surname" name="surname" required><br><br>
+      <label for="email">Adres e-mail:</label><br>
+      <input type="email" id="email" name="email" required><br><br>
+      <label for="message">Wiadomość:</label><br>
+      <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+      <input type="submit" value="Wyślij">
+    </form>
+  </main>
+  <footer>
+    <p>Patryk Stafecki 4c</p>
+  </footer>
+</div>
 </body>
 </html>
