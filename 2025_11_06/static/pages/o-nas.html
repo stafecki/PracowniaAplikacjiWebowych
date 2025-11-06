@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>O nas</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="container">
+  <h2>
+    Menu
+  </h2>
+  <menu>
+    <a href="/">Strona główna</a> |
+    <a href="/o-nas">O nas</a> |
+    <a href="/oferta">Oferta</a> |
+    <a href="/kontakt">Kontakt</a>
+  </menu>
+  <header>
+    <h1>
+      O firmie
+    </h1>
+  </header>
+  <main>
+    <p>
+      Jesteśmy firmą specjalizującą się w dostarczaniu najwyższej jakości usług dla naszych klientów. Nasz zespół składa się z doświadczonych profesjonalistów, którzy są zaangażowani w realizację projektów na najwyższym poziomie.
+    </p>
+    <div class="slider">
+      <div class="slides" aria-live="polite">
+        <img src="../images/kotomiler.jpeg" alt="Zdjęcie 1">
+        <img src="../images/kotomiler2.jpeg" alt="Zdjęcie 2">
+        <img src="../images/kotomiler3.jpeg" alt="Zdjęcie 3">
+      </div>
+      <button class="slider-btn prev" type="button" aria-label="Poprzednie">‹</button>
+      <button class="slider-btn next" type="button" aria-label="Następne">›</button>
+      <div class="dots" role="tablist" aria-label="Wybór slajdu"></div>
+    </div>
+    <p>
+      Nasza misja to nie tylko spełnianie oczekiwań klientów, ale także ich przewyższanie poprzez innowacyjne podejście i indywidualne rozwiązania dostosowane do ich potrzeb.
+    </p>
+    <p>
+      Dziękujemy za zaufanie i zapraszamy do współpracy!
+    </p>
+  </main>
+  <footer>
+    <p>Patryk Stafecki 4c</p>
+  </footer>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.querySelector('.slider');
+    if (!slider) return;
+    const slidesWrap = slider.querySelector('.slides');
+    const imgs = Array.from(slidesWrap.querySelectorAll('img'));
+    const prevBtn = slider.querySelector('.prev');
+    const nextBtn = slider.querySelector('.next');
+    const dotsWrap = slider.querySelector('.dots');
+    let index = 0;
+    const total = imgs.length || 1;
+    let interval = null;
+
+    function renderDots(){
+      dotsWrap.innerHTML = '';
+      for(let i=0;i<total;i++){
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.dataset.index = i;
+        btn.title = 'Przejdź do slajdu ' + (i+1);
+        btn.addEventListener('click', () => { goTo(i); resetTimer(); });
+        dotsWrap.appendChild(btn);
+      }
+      updateDots();
+    }
+    function updateDots(){
+      Array.from(dotsWrap.children).forEach((b, i) => b.classList.toggle('active', i === index));
+    }
+    function show(){
+      slidesWrap.style.transform = `translateX(-${index * 100}%)`;
+      updateDots();
+    }
+    function next(){
+      index = (index + 1) % total;
+      show();
+    }
+    function prev(){
+      index = (index - 1 + total) % total;
+      show();
+    }
+    function goTo(i){
+      index = Math.max(0, Math.min(total - 1, i));
+      show();
+    }
+    function startTimer(){
+      stopTimer();
+      interval = setInterval(next, 3500);
+    }
+    function stopTimer(){ if(interval){ clearInterval(interval); interval = null; } }
+    function resetTimer(){ stopTimer(); startTimer(); }
+
+    prevBtn.addEventListener('click', () => { prev(); resetTimer(); });
+    nextBtn.addEventListener('click', () => { next(); resetTimer(); });
+    slider.addEventListener('mouseenter', stopTimer);
+    slider.addEventListener('mouseleave', startTimer);
+
+    slider.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { prev(); resetTimer(); }
+      if (e.key === 'ArrowRight') { next(); resetTimer(); }
+    });
+    slider.tabIndex = 0;
+
+    renderDots();
+    show();
+    startTimer();
+  });
+</script>
+</body>
+</html>
