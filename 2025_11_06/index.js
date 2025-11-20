@@ -108,5 +108,5 @@ app.get('/api/contact-messages/:id', async (req, res) => {
 app.use((err, req, res, next) => {
   console.error(err)
   if (res.headersSent) return next(err)
-  res.sendStatus(500)
+    res.sendStatus(500)
 })
