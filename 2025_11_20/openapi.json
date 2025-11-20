@@ -1,0 +1,408 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CRUD API do Blogu",
+    "version": "1.0.0",
+    "description": "CRUD API do blogu z użytkownikami, postami, kategoriami i komentarzami."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local server"
+    }
+  ],
+  "tags": [
+    { "name": "Users", "description": "Operations for users" },
+    { "name": "Posts", "description": "Operations for posts" },
+    { "name": "Categories", "description": "Operations for categories" },
+    { "name": "Comments", "description": "Operations for comments" }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get all users",
+        "responses": {
+          "200": {
+            "description": "List of users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/User" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create a user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserCreate" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
+            }
+          },
+          "400": { "description": "Bad Request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+          "409": { "description": "Conflict (unique constraint)", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/users/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "integer", "format": "int32" }
+        }
+      ],
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get user by id",
+        "responses": {
+          "200": { "description": "User object", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } } },
+          "400": { "description": "Invalid id", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+          "404": { "description": "Not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Update user",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/UserUpdate" } } }
+        },
+        "responses": {
+          "200": { "description": "Updated user", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } } },
+          "400": { "description": "Bad Request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+          "404": { "description": "Not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete user",
+        "responses": {
+          "200": { "description": "Deleted user", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DeleteResponse" } } } },
+          "400": { "description": "Bad Request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/posts": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "Get all posts",
+        "responses": {
+          "200": {
+            "description": "List of posts",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Post" } }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Posts"],
+        "summary": "Create a post",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PostCreate" } } }
+        },
+        "responses": {
+          "201": { "description": "Post created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Post" } } } },
+          "400": { "description": "Bad Request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/posts/{id}": {
+      "parameters": [
+        { "name": "id", "in": "path", "required": true, "schema": { "type": "integer", "format": "int32" } }
+      ],
+      "get": {
+        "tags": ["Posts"],
+        "summary": "Get post by id",
+        "responses": {
+          "200": { "description": "Post object", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Post" } } } },
+          "400": { "description": "Invalid id", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+          "404": { "description": "Not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      },
+      "put": {
+        "tags": ["Posts"],
+        "summary": "Update post",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PostUpdate" } } }
+        },
+        "responses": {
+          "200": { "description": "Updated post", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Post" } } } },
+          "400": { "description": "Bad Request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      },
+      "delete": {
+        "tags": ["Posts"],
+        "summary": "Delete post",
+        "responses": {
+          "200": { "description": "Deleted post", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DeleteResponse" } } } },
+          "400": { "description": "Bad Request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Get all categories",
+        "responses": {
+          "200": { "description": "List of categories", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Category" } } } } }
+        }
+      },
+      "post": {
+        "tags": ["Categories"],
+        "summary": "Create a category",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CategoryCreate" } } }
+        },
+        "responses": {
+          "201": { "description": "Category created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Category" } } } },
+          "400": { "description": "Bad Request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+          "409": { "description": "Conflict (unique)", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/categories/{id}": {
+      "parameters": [
+        { "name": "id", "in": "path", "required": true, "schema": { "type": "integer", "format": "int32" } }
+      ],
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Get category by id",
+        "responses": {
+          "200": { "description": "Category object", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Category" } } } },
+          "400": { "description": "Invalid id", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+          "404": { "description": "Not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      },
+      "put": {
+        "tags": ["Categories"],
+        "summary": "Update category",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CategoryUpdate" } } }
+        },
+        "responses": {
+          "200": { "description": "Updated category", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Category" } } } },
+          "400": { "description": "Bad Request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      },
+      "delete": {
+        "tags": ["Categories"],
+        "summary": "Delete category",
+        "responses": {
+          "200": { "description": "Deleted category", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DeleteResponse" } } } },
+          "400": { "description": "Bad Request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/comments": {
+      "get": {
+        "tags": ["Comments"],
+        "summary": "Get all comments",
+        "responses": {
+          "200": { "description": "List of comments", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Comment" } } } } }
+        }
+      },
+      "post": {
+        "tags": ["Comments"],
+        "summary": "Create a comment",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CommentCreate" } } }
+        },
+        "responses": {
+          "201": { "description": "Comment created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Comment" } } } },
+          "400": { "description": "Bad Request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "parameters": [
+        { "name": "id", "in": "path", "required": true, "schema": { "type": "integer", "format": "int32" } }
+      ],
+      "get": {
+        "tags": ["Comments"],
+        "summary": "Get comment by id",
+        "responses": {
+          "200": { "description": "Comment object", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Comment" } } } },
+          "400": { "description": "Invalid id", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+          "404": { "description": "Not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      },
+      "put": {
+        "tags": ["Comments"],
+        "summary": "Update comment",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CommentUpdate" } } }
+        },
+        "responses": {
+          "200": { "description": "Updated comment", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Comment" } } } },
+          "400": { "description": "Bad Request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      },
+      "delete": {
+        "tags": ["Comments"],
+        "summary": "Delete comment",
+        "responses": {
+          "200": { "description": "Deleted comment", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DeleteResponse" } } } },
+          "400": { "description": "Bad Request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "email": { "type": "string", "example": "test@example.com" },
+          "name": { "type": "string", "nullable": true, "example": "Jan" },
+          "createdAt": { "type": "string", "format": "date-time", "example": "2025-01-01T12:00:00Z" }
+        },
+        "required": ["id", "email", "createdAt"]
+      },
+      "UserCreate": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string", "example": "test@example.com" },
+          "name": { "type": "string", "example": "Jan" }
+        },
+        "required": ["email"]
+      },
+      "UserUpdate": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "name": { "type": "string" }
+        }
+      },
+      "Post": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "title": { "type": "string", "example": "Hello world" },
+          "content": { "type": "string", "nullable": true, "example": "Post content" },
+          "published": { "type": "boolean", "example": false },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" },
+          "authorId": { "type": "integer", "nullable": true, "example": 1 },
+          "categoryId": { "type": "integer", "nullable": true, "example": 2 }
+        },
+        "required": ["id", "title", "createdAt", "updatedAt", "published"]
+      },
+      "PostCreate": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "content": { "type": "string" },
+          "published": { "type": "boolean", "default": false },
+          "authorId": { "type": "integer" },
+          "categoryId": { "type": "integer" }
+        },
+        "required": ["title"]
+      },
+      "PostUpdate": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "content": { "type": "string" },
+          "published": { "type": "boolean" },
+          "authorId": { "type": ["integer", "null"] },
+          "categoryId": { "type": ["integer", "null"] }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "name": { "type": "string", "example": "General" },
+          "createdAt": { "type": "string", "format": "date-time" }
+        },
+        "required": ["id", "name", "createdAt"]
+      },
+      "CategoryCreate": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" }
+        },
+        "required": ["name"]
+      },
+      "CategoryUpdate": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" }
+        }
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "author": { "type": "string", "example": "Anon" },
+          "content": { "type": "string", "example": "Nice post!" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "postId": { "type": "integer", "example": 1 },
+          "userId": { "type": "integer", "nullable": true, "example": 1 }
+        },
+        "required": ["id", "author", "content", "createdAt", "postId"]
+      },
+      "CommentCreate": {
+        "type": "object",
+        "properties": {
+          "author": { "type": "string" },
+          "content": { "type": "string" },
+          "postId": { "type": "integer" },
+          "userId": { "type": "integer" }
+        },
+        "required": ["author", "content", "postId"]
+      },
+      "CommentUpdate": {
+        "type": "object",
+        "properties": {
+          "author": { "type": "string" },
+          "content": { "type": "string" },
+          "postId": { "type": ["integer", "null"] },
+          "userId": { "type": ["integer", "null"] }
+        }
+      },
+      "DeleteResponse": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string" },
+          "details": { "type": ["object", "array", "string", "null"] }
+        }
+      }
+    }
+  }
+}
