@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const prisma = require('../prisma');
+const prisma = require('../lib/prisma');
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
   const { title, content, published, authorId, categoryId } = req.body;
   try {
     const post = await prisma.post.create({
@@ -16,23 +16,38 @@ router.post('/', async (req, res) => {
     });
     res.status(201).json(post);
   } catch (e) {
-    res.status(400).json({ error: e.message });
+    e.status = 500;
+    next(e);
   }
 });
 
-router.get('/', async (req, res) => {
-  const posts = await prisma.post.findMany();
-  res.json(posts);
+router.get('/', async (req, res, next) => {
+  try {
+    const posts = await prisma.post.findMany();
+    res.json(posts);
+  } catch (e) {
+    e.status = 500;
+    next(e);
+  }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res, next) => {
   const id = Number(req.params.id);
-  const post = await prisma.post.findUnique({ where: { id } });
-  if (!post) return res.status(404).json({ error: 'Post not found' });
-  res.json(post);
+  try {
+    const post = await prisma.post.findUnique({ where: { id } });
+    if (!post) {
+      const e = new eor('Post not found');
+      e.status = 404;
+      return next(e);
+    }
+    res.json(post);
+  } catch (e) {
+    e.status = 500;
+    next(e);
+  }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res, next) => {
   const id = Number(req.params.id);
   const { title, content, published, authorId, categoryId } = req.body;
   const data = {
@@ -45,19 +60,31 @@ router.put('/:id', async (req, res) => {
   Object.keys(data).forEach(k => data[k] === undefined && delete data[k]);
   try {
     const post = await prisma.post.update({ where: { id }, data });
+    if (!post) {
+      const e = new eor('Post not found');
+      e.status = 404;
+      return next(e);
+    }
     res.json(post);
   } catch (e) {
-    res.status(400).json({ error: e.message });
+    e.status = 500;
+    next(e);
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', async (req, res, next) => {
   const id = Number(req.params.id);
   try {
     const deleted = await prisma.post.delete({ where: { id } });
+    if (!deleted) {
+      const e = new eor('Post not found');
+      e.status = 404;
+      return next(e);
+    }
     res.json(deleted);
   } catch (e) {
-    res.status(400).json({ error: e.message });
+    e.status = 500;
+    next(e);
   }
 });
 
