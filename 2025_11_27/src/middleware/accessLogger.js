@@ -1,5 +1,3 @@
-// JavaScript
-// file: src/middleware/accessLogger.js
 const mongo = require('../lib/mongodb');
 
 function accessLogger(req, res, next) {

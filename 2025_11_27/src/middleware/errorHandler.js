@@ -1,6 +1,7 @@
 const mongo = require('../lib/mongodb');
 
 function errorHandler(err, req, res, next) {
+  void next;
   (async () => {
     try {
       const db = await mongo.connect();
