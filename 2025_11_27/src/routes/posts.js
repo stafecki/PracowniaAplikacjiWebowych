@@ -36,7 +36,7 @@ router.get('/:id', async (req, res, next) => {
   try {
     const post = await prisma.post.findUnique({ where: { id } });
     if (!post) {
-      const e = new eor('Post not found');
+      const e = new Error('Post not found');
       e.status = 404;
       return next(e);
     }
@@ -61,7 +61,7 @@ router.put('/:id', async (req, res, next) => {
   try {
     const post = await prisma.post.update({ where: { id }, data });
     if (!post) {
-      const e = new eor('Post not found');
+      const e = new Error('Post not found');
       e.status = 404;
       return next(e);
     }
@@ -77,7 +77,7 @@ router.delete('/:id', async (req, res, next) => {
   try {
     const deleted = await prisma.post.delete({ where: { id } });
     if (!deleted) {
-      const e = new eor('Post not found');
+      const e = new Error('Post not found');
       e.status = 404;
       return next(e);
     }

@@ -13,11 +13,12 @@ const app = express();
 
 app.use(express.json());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(openApi));
+app.use(accessLogger);
 
-app.use('/users',accessLogger, usersRouter);
-app.use('/posts',accessLogger, postsRouter);
-app.use('/categories',accessLogger, categoriesRouter);
-app.use('/comments',accessLogger, commentsRouter);
+app.use('/users', usersRouter);
+app.use('/posts', postsRouter);
+app.use('/categories', categoriesRouter);
+app.use('/comments', commentsRouter);
 
 app.use(errorHandler);
 app.listen(3000, () => {

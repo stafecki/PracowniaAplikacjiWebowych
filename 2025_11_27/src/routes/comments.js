@@ -5,7 +5,7 @@ const prisma = require('../lib/prisma');
 router.post('/', async (req, res, next) => {
   const { author, content, postId, userId } = req.body;
   if (!author || !content || !postId) {
-    const e = new eor('author, content and postId required');
+    const e = new Error('author, content and postId required');
     e.status = 400;
     return next(e);
   }
@@ -40,7 +40,7 @@ router.get('/:id', async (req, res, next) => {
   try {
     const c = await prisma.comment.findUnique({ where: { id } });
     if (!c) {
-      const e = new eor('Comment not found');
+      const e = new Error('Comment not found');
       e.status = 404;
       return next(e);
     }
@@ -64,7 +64,7 @@ router.put('/:id', async (req, res, next) => {
   try {
     const updated = await prisma.comment.update({ where: { id }, data });
     if (!updated) {
-      const e = new eor('Comment not found');
+      const e = new Error('Comment not found');
       e.status = 404;
       return next(e);
     }
@@ -80,7 +80,7 @@ router.delete('/:id', async (req, res, next) => {
   try {
     const deleted = await prisma.comment.delete({ where: { id } });
     if (!deleted) {
-      const e = new eor('Comment not found');
+      const e = new Error('Comment not found');
       e.status = 404;
       return next(e);
     }

@@ -28,7 +28,7 @@ router.get('/:id', async (req, res, next) => {
   try {
     const cat = await prisma.category.findUnique({ where: { id } });
     if (!cat) {
-      const e = new eor('Category not found');
+      const e = new Error('Category not found');
       e.status = 404;
       return next(e);
     }
@@ -45,7 +45,7 @@ router.put('/:id', async (req, res, next) => {
   try {
     const cat = await prisma.category.update({ where: { id }, data: { name } });
     if (!cat) {
-      const e = new eor('Category not found');
+      const e = new Error('Category not found');
       e.status = 404;
       return next(e);
     }
@@ -61,7 +61,7 @@ router.delete('/:id', async (req, res, next) => {
   try {
     const deleted = await prisma.category.delete({ where: { id } });
     if (!deleted) {
-      const e = new eor('Category not found');
+      const e = new Error('Category not found');
       e.status = 404;
       return next(e);
     }
