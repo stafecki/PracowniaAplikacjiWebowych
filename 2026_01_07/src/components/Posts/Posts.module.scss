@@ -1,0 +1,35 @@
+.Posts{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h1{
+    font-size: 3rem;
+    color: #333;
+  }
+  p{
+    font-size: 1.6rem;
+    color: #666;
+  }
+  ul{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    list-style-type: none;
+    padding: 0;
+    li{
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      transition: box-shadow 0.2s;
+      &:hover{
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      p{
+        font-size: 1.4rem;
+        color: #555;
+      }
+    }
+  }
+
+}
