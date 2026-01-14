@@ -19,15 +19,20 @@
     padding: 0;
     li{
       padding: 15px;
-      border: 1px solid #ddd;
       border-radius: 8px;
       transition: box-shadow 0.2s;
+      border: 1px solid #ddd;
       &:hover{
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       }
+      h2{
+            font-size: 2rem;
+            color: #222;
+            margin-bottom: 8px;
+      }
       p{
         font-size: 1.4rem;
-        color: #555;
+        color: #444;
       }
     }
   }

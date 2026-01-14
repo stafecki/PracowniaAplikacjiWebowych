@@ -17,9 +17,11 @@
     list-style-type: none;
     padding: 0;
     li{
+      padding-right: 10px;
       margin-bottom: 10px;
       font-size: 1.4rem;
       color: #444;
+      border-right: 1px solid #444;
       a{
         text-decoration: none;
         color: #444;
@@ -28,6 +30,9 @@
           color: #574fd6;
         }
       }
+    }
+    li:last-child{
+        border-right: none;
     }
   }
 }

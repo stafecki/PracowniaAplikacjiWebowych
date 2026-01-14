@@ -6,20 +6,26 @@ export default function Posts(){
         </h1>
         <ul>
             <li>
-                <p>Post 1</p>
+                <h2>Post 1</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid amet at consectetur, culpa cumque facilis hic iure nemo non perferendis, quia, quisquam ut! Error facere natus officia quos vel!</p>
             </li>
             <li>
-                <p>Post 2</p>
+                <h2>Post 2</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid amet at consectetur, culpa cumque facilis hic iure nemo non perferendis, quia, quisquam ut! Error facere natus officia quos vel!</p>
             </li>
             <li>
-                <p>Post 3</p>
+                <h2>Post 3</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid amet at consectetur, culpa cumque facilis hic iure nemo non perferendis, quia, quisquam ut! Error facere natus officia quos vel!</p>
             </li>
             <li>
-                <p>Post 4</p>
+                <h2>Post 4</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid amet at consectetur, culpa cumque facilis hic iure nemo non perferendis, quia, quisquam ut! Error facere natus officia quos vel!</p>
             </li>
             <li>
-                <p>Post 5</p>
+                <h2>Post 5</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid amet at consectetur, culpa cumque facilis hic iure nemo non perferendis, quia, quisquam ut! Error facere natus officia quos vel!</p>
             </li>
+
         </ul>
     </div>
 }
