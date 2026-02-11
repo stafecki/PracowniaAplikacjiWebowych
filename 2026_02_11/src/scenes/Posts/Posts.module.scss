@@ -1,0 +1,57 @@
+.Posts{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h1{
+    font-size: 3rem;
+    color: #333;
+  }
+  p{
+    font-size: 1.6rem;
+    color: #666;
+  }
+  ul{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    list-style-type: none;
+    padding: 0;
+    li{
+      padding: 15px;
+      border-radius: 8px;
+      transition: box-shadow 0.2s;
+      border: 1px solid #ddd;
+
+      &:hover{
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      h5{
+            font-size: 2rem;
+            color: #222;
+            margin-bottom: 8px;
+      }
+      p{
+        font-size: 1.4rem;
+        color: #444;
+      }
+      .PostsPostLink{
+        margin-top: 1rem;
+        display: inline-block;
+        padding: 10px;
+        border-radius: 8px;
+        transition: box-shadow 0.2s;
+        border: 1px solid #ddd;
+        background-color: #000;
+        text-decoration: none;
+        color: #fff;
+
+        &:hover{
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+        }
+      }
+    }
+  }
+
+}

@@ -1,0 +1,38 @@
+.Categories{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h1{
+    font-size: 3rem;
+    color: #333;
+  }
+  p{
+    font-size: 1.6rem;
+    color: #666;
+  }
+  ul{
+    display: flex;
+    gap: 1rem;
+    list-style-type: none;
+    padding: 0;
+    li{
+      padding-right: 10px;
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+      color: #444;
+      border-right: 1px solid #444;
+      a{
+        text-decoration: none;
+        color: #444;
+        transition: color 0.2s;
+        &:hover{
+          color: #574fd6;
+        }
+      }
+    }
+    li:last-child{
+        border-right: none;
+    }
+  }
+}

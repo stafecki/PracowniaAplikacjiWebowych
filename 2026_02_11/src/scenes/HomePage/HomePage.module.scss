@@ -1,0 +1,14 @@
+.HomePage{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h1{
+    font-size: 3rem;
+    color: #333;
+  }
+  p{
+    font-size: 1.6rem;
+    color: #666;
+  }
+}
