@@ -1,0 +1,19 @@
+services:
+  # MySQL - Główna baza danych
+  mysql-db:
+    image: mysql:8.0
+    container_name: blog-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: blog_db
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
+
+  # MongoDB - Logi i historia
+  mongodb:
+    image: mongo:latest
+    container_name: blog-mongo
+    restart: always
+    ports:
+      - "27017:27017"

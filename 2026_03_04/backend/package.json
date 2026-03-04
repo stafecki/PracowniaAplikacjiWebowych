@@ -1,0 +1,31 @@
+{
+  "name": "express-starter-cjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "inspect": "nodemon --inspect src/index.js",
+    "format": "prettier --write .",
+    "lint": "eslint . ",
+    "lint:fix": "eslint . --fix "
+  },
+  "private": true,
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "cors": "^2.8.6",
+    "express": "^4.21.2",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.0.0",
+    "prisma": "^6.19.0",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "@eslint/json": "^0.13.2",
+    "eslint": "^9.38.0",
+    "globals": "^16.4.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2"
+  }
+}

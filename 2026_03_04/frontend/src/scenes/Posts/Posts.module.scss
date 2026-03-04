@@ -1,0 +1,87 @@
+.Posts{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h1{
+    font-size: 3rem;
+    color: #333;
+  }
+  p{
+    font-size: 1.6rem;
+    color: #666;
+  }
+  ul{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    list-style-type: none;
+    padding: 0;
+    li{
+      padding: 15px;
+      border-radius: 8px;
+      transition: box-shadow 0.2s;
+      border: 1px solid #ddd;
+
+      &:hover{
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      h5{
+            font-size: 2rem;
+            color: #222;
+            margin-bottom: 8px;
+      }
+      p{
+        font-size: 1.4rem;
+        color: #444;
+      }
+      .PostsPostLink{
+        margin-top: 1rem;
+        display: inline-block;
+        padding: 10px;
+        border-radius: 8px;
+        transition: box-shadow 0.2s;
+        border: 1px solid #ddd;
+        background-color: #000;
+        text-decoration: none;
+        color: #fff;
+
+        &:hover{
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+        }
+      }
+    }
+  }
+  .PostsFilters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    button {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      color: #333;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+
+    .PostsFilterActive {
+      background-color: #000;
+      color: #fff;
+      border-color: #000;
+
+      &:hover {
+        background-color: #333;
+      }
+    }
+  }
+
+}
